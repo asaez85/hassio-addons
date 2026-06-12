@@ -1,8 +1,9 @@
 # Home Assistant addon build of Free-Games-Claimer-Remaster.
 # Adapted from the upstream Dockerfile; source is fetched from the
 # pinned commit below instead of a local build context.
-ARG BUILD_FROM=debian:bookworm-slim
-FROM ${BUILD_FROM}
+# Base fixed to Debian regardless of BUILD_FROM: the app needs apt/glibc
+# (Chromium, TurboVNC), so the default HA Alpine base does not work.
+FROM debian:bookworm-slim
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ARG DEBIAN_FRONTEND=noninteractive
