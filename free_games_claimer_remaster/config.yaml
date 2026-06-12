@@ -1,0 +1,62 @@
+name: Free Games Claimer Remaster
+version: "1.0.0"
+slug: free_games_claimer_remaster
+description: Automatically claims free games on Epic Games, Prime Gaming, GOG and Steam
+url: https://github.com/asaez85/Free-Games-Claimer-Remaster
+arch:
+  - aarch64
+  - amd64
+startup: application
+boot: manual
+init: false
+ports:
+  7080/tcp: 7080
+ports_description:
+  7080/tcp: noVNC web interface (watch the browser / solve captchas)
+webui: http://[HOST]:[PORT:7080]
+options:
+  SHOW: true
+  WIDTH: 1280
+  HEIGHT: 720
+  SCHEDULER_HOURS: 12
+  STORES: "epic,prime,gog"
+  EG_EMAIL: ""
+  EG_PASSWORD: ""
+  EG_OTPKEY: ""
+  PG_EMAIL: ""
+  PG_PASSWORD: ""
+  PG_OTPKEY: ""
+  GOG_EMAIL: ""
+  GOG_PASSWORD: ""
+  STEAM_USERNAME: ""
+  STEAM_PASSWORD: ""
+  DISCORD_WEBHOOK: ""
+  NOTIFY: ""
+  VNC_PASSWORD: ""
+  DEBUG: false
+  DRYRUN: false
+  env_vars: []
+schema:
+  SHOW: bool
+  WIDTH: int
+  HEIGHT: int
+  SCHEDULER_HOURS: int(1,168)
+  STORES: str
+  EG_EMAIL: str?
+  EG_PASSWORD: password?
+  EG_OTPKEY: password?
+  PG_EMAIL: str?
+  PG_PASSWORD: password?
+  PG_OTPKEY: password?
+  GOG_EMAIL: str?
+  GOG_PASSWORD: password?
+  STEAM_USERNAME: str?
+  STEAM_PASSWORD: password?
+  DISCORD_WEBHOOK: str?
+  NOTIFY: str?
+  VNC_PASSWORD: password?
+  DEBUG: bool
+  DRYRUN: bool
+  env_vars:
+    - name: str
+      value: str?
