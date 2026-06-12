@@ -55,6 +55,11 @@ WORKDIR /fgc
 RUN curl -fsSL "https://github.com/asaez85/Free-Games-Claimer-Remaster/archive/${FGC_COMMIT}.tar.gz" \
         | tar xz --strip-components=1 -C /fgc \
     && pip install --no-cache-dir --break-system-packages -r requirements.txt \
+    # nodriver only waits ~2.75s for Chromium's CDP port; a cold start on a
+    # Raspberry Pi takes longer, so extend the retry loop to ~2 minutes.
+    && NODRIVER_BROWSER=$(python3 -c "import nodriver, pathlib; print(pathlib.Path(nodriver.__file__).parent / 'core' / 'browser.py')") \
+    && sed -i 's/for _ in range(5):/for _ in range(240):/; s/if _ == 4:/if _ == 239:/' "$NODRIVER_BROWSER" \
+    && grep -q "range(240)" "$NODRIVER_BROWSER" \
     && dos2unix ./*.sh && chmod +x ./*.sh \
     && cp docker-entrypoint.sh /usr/local/bin/
 
