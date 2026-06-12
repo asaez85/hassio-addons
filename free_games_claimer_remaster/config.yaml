@@ -1,8 +1,8 @@
 name: Free Games Claimer Remaster
-version: "1.0.2"
+version: "1.0.3"
 slug: free_games_claimer_remaster
-description: Automatically claims free games on Epic Games, Prime Gaming, GOG and Steam
-url: https://github.com/asaez85/Free-Games-Claimer-Remaster
+description: Automatically claims free games on Epic Games, Prime Gaming, GOG and Steam (by Paweł Adamiec)
+url: https://github.com/P-Adamiec/Free-Games-Claimer-Remaster
 arch:
   - aarch64
   - amd64

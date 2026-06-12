@@ -1,10 +1,17 @@
 # Free Games Claimer Remaster
 
 Automatically claims free games on the Epic Games Store, Amazon Prime Gaming,
-GOG and Steam. Based on
-[Free-Games-Claimer-Remaster](https://github.com/asaez85/Free-Games-Claimer-Remaster),
-a Python rewrite of vogler/free-games-claimer using `nodriver` for stealth
-browser automation.
+GOG and Steam.
+
+## Credits
+
+All application code is
+[Free-Games-Claimer-Remaster](https://github.com/P-Adamiec/Free-Games-Claimer-Remaster)
+by **Paweł Adamiec** ([@P-Adamiec](https://github.com/P-Adamiec)), a Python
+rewrite of vogler/free-games-claimer using `nodriver` for stealth browser
+automation. This addon merely packages his project so it can be installed as
+a Home Assistant addon and run on Raspberry Pi (aarch64) as well as amd64.
+Please report application bugs upstream and consider supporting the author.
 
 ## Setup
 
@@ -43,6 +50,7 @@ removes them (you would need to log in again after reinstalling).
 
 ## Updating to a newer upstream version
 
-The addon builds from a commit of the source repository pinned in the
-`Dockerfile` (`FGC_COMMIT`). To pick up upstream changes, update that hash
-and bump `version` in `config.yaml`, then update the addon in Home Assistant.
+The addon builds from a commit of the upstream repository
+(P-Adamiec/Free-Games-Claimer-Remaster) pinned in the `Dockerfile`
+(`FGC_COMMIT`). To pick up upstream changes, update that hash and bump
+`version` in `config.yaml`, then update the addon in Home Assistant.

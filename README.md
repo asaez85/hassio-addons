@@ -12,4 +12,8 @@ Settings → Add-ons → Add-on Store → ⋮ → Repositories.
 ## Add-ons
 
 - **Free Games Claimer Remaster** — automatically claims free games on
-  Epic Games, Prime Gaming, GOG and Steam.
+  Epic Games, Prime Gaming, GOG and Steam. Packaging of
+  [Free-Games-Claimer-Remaster](https://github.com/P-Adamiec/Free-Games-Claimer-Remaster)
+  by [Paweł Adamiec](https://github.com/P-Adamiec); all credit for the
+  application goes to him. This repository only adapts it to run as a
+  Home Assistant addon (including Raspberry Pi / aarch64 support).

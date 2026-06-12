@@ -1,4 +1,8 @@
-# Home Assistant addon build of Free-Games-Claimer-Remaster.
+# Home Assistant addon build of Free-Games-Claimer-Remaster,
+# created by Paweł Adamiec (https://github.com/P-Adamiec).
+# This addon only packages his project so it runs as a Home Assistant
+# addon on Raspberry Pi (aarch64) and amd64; all application code and
+# credit belong to the upstream author.
 # Adapted from the upstream Dockerfile; source is fetched from the
 # pinned commit below instead of a local build context.
 # Base fixed to Debian regardless of BUILD_FROM: the app needs apt/glibc
@@ -8,7 +12,7 @@ FROM debian:bookworm-slim
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ARG DEBIAN_FRONTEND=noninteractive
 
-# Pinned commit of https://github.com/asaez85/Free-Games-Claimer-Remaster
+# Pinned commit of https://github.com/P-Adamiec/Free-Games-Claimer-Remaster
 ARG FGC_COMMIT=6bdb8d1f84b94e823e3f3dfd86abf7f32babcb59
 
 RUN apt-get update \
@@ -52,7 +56,7 @@ RUN apt-get update \
 WORKDIR /fgc
 
 # Fetch the application source at the pinned commit
-RUN curl -fsSL "https://github.com/asaez85/Free-Games-Claimer-Remaster/archive/${FGC_COMMIT}.tar.gz" \
+RUN curl -fsSL "https://github.com/P-Adamiec/Free-Games-Claimer-Remaster/archive/${FGC_COMMIT}.tar.gz" \
         | tar xz --strip-components=1 -C /fgc \
     && pip install --no-cache-dir --break-system-packages -r requirements.txt \
     # nodriver only waits ~2.75s for Chromium's CDP port; a cold start on a
