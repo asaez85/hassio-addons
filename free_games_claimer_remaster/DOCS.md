@@ -52,5 +52,11 @@ removes them (you would need to log in again after reinstalling).
 
 The addon builds from a commit of the upstream repository
 (P-Adamiec/Free-Games-Claimer-Remaster) pinned in the `Dockerfile`
-(`FGC_COMMIT`). To pick up upstream changes, update that hash and bump
-`version` in `config.yaml`, then update the addon in Home Assistant.
+(`FGC_COMMIT`). A GitHub Action checks upstream daily and, when there is a
+new commit, bumps the pinned hash and the addon version automatically — the
+update then shows up in Home Assistant (and installs itself if the addon's
+auto-update is enabled).
+
+If an upstream change ever breaks the build (e.g. the nodriver timeout patch
+no longer applies), the build fails and the previously installed version
+keeps running.

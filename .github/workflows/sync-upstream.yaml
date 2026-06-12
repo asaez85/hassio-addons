@@ -1,0 +1,53 @@
+name: Sync upstream Free-Games-Claimer-Remaster
+
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check upstream and bump addon version
+        run: |
+          set -euo pipefail
+          ADDON=free_games_claimer_remaster
+
+          LATEST=$(curl -fsSL https://api.github.com/repos/P-Adamiec/Free-Games-Claimer-Remaster/commits/main | jq -r .sha)
+          CURRENT=$(grep -oP '(?<=^ARG FGC_COMMIT=)[0-9a-f]+' "$ADDON/Dockerfile")
+
+          if [ "$LATEST" = "$CURRENT" ]; then
+            echo "Already up to date ($CURRENT)"
+            exit 0
+          fi
+
+          MESSAGE=$(curl -fsSL "https://api.github.com/repos/P-Adamiec/Free-Games-Claimer-Remaster/commits/$LATEST" \
+            | jq -r '.commit.message' | head -1)
+
+          sed -i "s/^ARG FGC_COMMIT=.*/ARG FGC_COMMIT=$LATEST/" "$ADDON/Dockerfile"
+
+          OLD_VERSION=$(grep -oP '(?<=^version: ")[^"]+' "$ADDON/config.yaml")
+          NEW_VERSION=$(echo "$OLD_VERSION" | awk -F. '{printf "%s.%s.%s", $1, $2, $3+1}')
+          sed -i "s/^version: \".*\"/version: \"$NEW_VERSION\"/" "$ADDON/config.yaml"
+
+          {
+            echo "## $NEW_VERSION"
+            echo
+            echo "- Upstream sync to [\`${LATEST:0:8}\`](https://github.com/P-Adamiec/Free-Games-Claimer-Remaster/commit/$LATEST): $MESSAGE"
+            echo
+            cat "$ADDON/CHANGELOG.md" 2>/dev/null || true
+          } > /tmp/changelog && mv /tmp/changelog "$ADDON/CHANGELOG.md"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add "$ADDON"
+          git commit -m "Sync upstream to ${LATEST:0:8} (addon $NEW_VERSION)
+
+          Upstream: $MESSAGE"
+          git push
