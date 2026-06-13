@@ -1,3 +1,11 @@
+## 1.1.1
+
+- Stop persisting the budget cache under `/data`. The cache stored a run lock
+  with `pid=1`, which is always "alive" inside the container and made the
+  addon deadlock on restart with "Refusing to use shared dataDir". The cache
+  is now ephemeral (wiped on each start), which also avoids stale-schema
+  errors. Re-downloading the budget each run is cheap.
+
 ## 1.1.0
 
 - Pin the bundled `@actual-app/api`/`@actual-app/core` client to

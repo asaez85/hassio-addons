@@ -94,11 +94,14 @@ env_vars:
 See the [upstream README](https://github.com/sakowicz/actual-ai) for the
 full list of environment variables.
 
-## Persistence
+## Budget cache
 
-The downloaded budget cache lives in `/data/actual-cache` (the addon
-symlinks the app's `/tmp/actual-ai` there), so it survives restarts and
-updates and is only lost if you uninstall the addon.
+The addon keeps the app's budget cache **ephemeral** (re-downloaded on every
+run) instead of persisting it. This is intentional: the cache stores a run
+lock whose PID is always `1` inside the container, so a persisted lock would
+make the addon refuse to start after a crash/restart ("Refusing to use shared
+dataDir"). Re-downloading is cheap and also avoids stale-schema errors when
+the Actual server migrates its schema.
 
 ## Credits
 

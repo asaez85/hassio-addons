@@ -12,11 +12,14 @@ import sys
 
 OPTIONS_PATH = "/data/options.json"
 APP_DIR = "/opt/node_app/app"
-# Upstream hardcodes dataDir = "/tmp/actual-ai/"; symlink it into /data so the
-# downloaded budget (and the run lock) survive restarts and avoid a full
-# re-download on every boot.
-DATA_DIR_LINK = "/tmp/actual-ai"
-PERSIST_DIR = "/data/actual-cache"
+# Upstream hardcodes dataDir = "/tmp/actual-ai/". We deliberately keep it
+# ephemeral and wipe it on every start (see clean_data_dir): the budget cache
+# stores a run lock whose pid is 1 inside the container, which always looks
+# "alive" and would deadlock every restart ("Refusing to use shared dataDir").
+# Re-downloading the budget each run is cheap and also avoids stale-schema
+# problems when the Actual server (esp. Edge) migrates its schema.
+DATA_DIR = "/tmp/actual-ai"
+STALE_PERSIST_DIR = "/data/actual-cache"
 
 
 def load_options():
@@ -57,23 +60,21 @@ def build_env(opts):
     return env
 
 
-def persist_data_dir():
-    os.makedirs(PERSIST_DIR, exist_ok=True)
-    # Replace any pre-existing /tmp/actual-ai with a symlink to /data.
-    if os.path.islink(DATA_DIR_LINK):
-        if os.readlink(DATA_DIR_LINK) == PERSIST_DIR:
-            return
-        os.unlink(DATA_DIR_LINK)
-    elif os.path.exists(DATA_DIR_LINK):
-        import shutil
-        shutil.rmtree(DATA_DIR_LINK, ignore_errors=True)
-    os.symlink(PERSIST_DIR, DATA_DIR_LINK)
+def clean_data_dir():
+    import shutil
+    # Drop any leftover dataDir (and the now-unused persisted cache from earlier
+    # addon versions) so no stale lock or stale schema survives into this run.
+    if os.path.islink(DATA_DIR):
+        os.unlink(DATA_DIR)
+    elif os.path.isdir(DATA_DIR):
+        shutil.rmtree(DATA_DIR, ignore_errors=True)
+    shutil.rmtree(STALE_PERSIST_DIR, ignore_errors=True)
 
 
 def main():
     opts = load_options()
     env = build_env(opts)
-    persist_data_dir()
+    clean_data_dir()
 
     os.chdir(APP_DIR)
     provider = env.get("LLM_PROVIDER", "(default)")
