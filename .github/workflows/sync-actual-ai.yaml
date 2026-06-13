@@ -1,0 +1,51 @@
+name: Sync upstream actual-ai
+
+on:
+  schedule:
+    - cron: "23 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check upstream image and bump addon version
+        run: |
+          set -euo pipefail
+          ADDON=actual_ai
+
+          # Highest semver tag published on Docker Hub (ignore "latest").
+          LATEST=$(curl -fsSL "https://hub.docker.com/v2/repositories/sakowicz/actual-ai/tags?page_size=100" \
+            | jq -r '.results[].name | select(test("^[0-9]+\\.[0-9]+\\.[0-9]+$"))' \
+            | sort -V | tail -1)
+          CURRENT=$(grep -oP '(?<=sakowicz/actual-ai:)[0-9.]+' "$ADDON/build.yaml" | head -1)
+
+          if [ -z "$LATEST" ] || [ "$LATEST" = "$CURRENT" ]; then
+            echo "Already up to date ($CURRENT)"
+            exit 0
+          fi
+
+          sed -i "s#sakowicz/actual-ai:[0-9.]\+#sakowicz/actual-ai:$LATEST#g" "$ADDON/build.yaml"
+
+          OLD_VERSION=$(grep -oP '(?<=^version: ")[^"]+' "$ADDON/config.yaml")
+          NEW_VERSION=$(echo "$OLD_VERSION" | awk -F. '{printf "%s.%s.%s", $1, $2, $3+1}')
+          sed -i "s/^version: \".*\"/version: \"$NEW_VERSION\"/" "$ADDON/config.yaml"
+
+          {
+            echo "## $NEW_VERSION"
+            echo
+            echo "- Upstream sync to [\`$LATEST\`](https://github.com/sakowicz/actual-ai/releases/tag/$LATEST)"
+            echo
+            cat "$ADDON/CHANGELOG.md" 2>/dev/null || true
+          } > /tmp/changelog && mv /tmp/changelog "$ADDON/CHANGELOG.md"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add "$ADDON"
+          git commit -m "Sync actual-ai upstream to $LATEST (addon $NEW_VERSION)"
+          git push

@@ -11,6 +11,26 @@ Settings → Add-ons → Add-on Store → ⋮ → Repositories.
 
 ## Add-ons
 
+### [Actual AI](actual_ai/)
+
+AI-powered transaction categorization for [Actual Budget](https://actualbudget.org):
+connects to your Actual server on a schedule and uses an LLM (OpenAI, Anthropic,
+OpenRouter, Google, Groq or Ollama) to categorize uncategorized transactions.
+
+This is a packaging of [actual-ai](https://github.com/sakowicz/actual-ai) by
+**[Szymon Sakowicz](https://github.com/sakowicz)** — all credit for the
+application goes to him. This repository only wraps his official multi-arch
+Docker image to run as a Home Assistant addon:
+
+- Maps addon options to the app's environment variables.
+- Persists the downloaded budget cache across restarts.
+- A daily GitHub Action tracks upstream Docker Hub tags and publishes new
+  addon versions automatically.
+
+**Architectures:** `aarch64`, `amd64`
+
+See the [addon documentation](actual_ai/DOCS.md) for configuration details.
+
 ### [Free Games Claimer Remaster](free_games_claimer_remaster/)
 
 Automatically claims free games on the Epic Games Store, Amazon Prime Gaming,

@@ -1,0 +1,64 @@
+name: Actual AI
+version: "1.0.0"
+slug: actual_ai
+description: AI-powered transaction categorization for Actual Budget (by Szymon Sakowicz)
+url: https://github.com/sakowicz/actual-ai
+arch:
+  - aarch64
+  - amd64
+startup: services
+boot: auto
+init: false
+options:
+  ACTUAL_SERVER_URL: "https://actualbudget.asaezs.com"
+  ACTUAL_PASSWORD: ""
+  ACTUAL_BUDGET_ID: ""
+  ACTUAL_E2E_PASSWORD: ""
+  CLASSIFICATION_SCHEDULE_CRON: "0 */4 * * *"
+  LLM_PROVIDER: openai
+  OPENAI_API_KEY: ""
+  OPENAI_MODEL: "gpt-4.1-mini"
+  ANTHROPIC_API_KEY: ""
+  ANTHROPIC_MODEL: "claude-3-5-sonnet-latest"
+  OPENROUTER_API_KEY: ""
+  OPENROUTER_MODEL: "deepseek/deepseek-v3.2"
+  GOOGLE_GENERATIVE_AI_API_KEY: ""
+  GOOGLE_GENERATIVE_AI_MODEL: "gemini-1.5-flash"
+  GROQ_API_KEY: ""
+  GROQ_MODEL: "llama-3.3-70b-versatile"
+  OLLAMA_MODEL: "llama3.1"
+  OLLAMA_BASE_URL: "http://localhost:11434/api"
+  FEATURES:
+    - classifyOnStartup
+    - syncAccountsBeforeClassify
+  NOT_GUESSED_TAG: "#actual-ai-miss"
+  GUESSED_TAG: "#actual-ai"
+  VALUESERP_API_KEY: ""
+  env_vars: []
+schema:
+  ACTUAL_SERVER_URL: url
+  ACTUAL_PASSWORD: password
+  ACTUAL_BUDGET_ID: str
+  ACTUAL_E2E_PASSWORD: password?
+  CLASSIFICATION_SCHEDULE_CRON: str
+  LLM_PROVIDER: list(openai|anthropic|openrouter|google-generative-ai|ollama|groq)
+  OPENAI_API_KEY: password?
+  OPENAI_MODEL: str?
+  ANTHROPIC_API_KEY: password?
+  ANTHROPIC_MODEL: str?
+  OPENROUTER_API_KEY: password?
+  OPENROUTER_MODEL: str?
+  GOOGLE_GENERATIVE_AI_API_KEY: password?
+  GOOGLE_GENERATIVE_AI_MODEL: str?
+  GROQ_API_KEY: password?
+  GROQ_MODEL: str?
+  OLLAMA_MODEL: str?
+  OLLAMA_BASE_URL: str?
+  FEATURES:
+    - str
+  NOT_GUESSED_TAG: str?
+  GUESSED_TAG: str?
+  VALUESERP_API_KEY: password?
+  env_vars:
+    - name: str
+      value: str?
