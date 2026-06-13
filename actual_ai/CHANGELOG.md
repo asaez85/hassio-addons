@@ -1,3 +1,12 @@
+## 1.1.0
+
+- Pin the bundled `@actual-app/api`/`@actual-app/core` client to
+  `26.7.0-nightly.20260612` to match an Actual Budget **Edge** server. The
+  upstream image ships the 26.6.0 stable client, which is older than the
+  Edge budget schema and fails with `SyncError: invalid-schema`
+  (`no such column: bank_sync_status`). Adjust the `ACTUAL_API_VERSION`
+  build arg if your Edge server schema moves on.
+
 ## 1.0.0
 
 - Initial packaging of [actual-ai](https://github.com/sakowicz/actual-ai)
