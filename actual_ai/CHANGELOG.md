@@ -1,3 +1,12 @@
+## 1.1.2
+
+- Drop `syncAccountsBeforeClassify` from the default `FEATURES`. That feature
+  triggers Actual's bank sync for every account with sync configured, and a
+  single failing account (e.g. an old/disabled one) throws and crashes the
+  process before any categorization runs. actual-ai does not need to bank-sync;
+  transactions arrive through your normal flow. Re-add it only if all your
+  synced accounts are healthy.
+
 ## 1.1.1
 
 - Stop persisting the budget cache under `/data`. The cache stored a run lock

@@ -55,6 +55,9 @@ the `GUESSED_TAG` note; the ones it could not classify get `NOT_GUESSED_TAG`.
 
 - `classifyOnStartup` — run a classification pass as soon as the addon starts.
 - `syncAccountsBeforeClassify` — run the Actual bank sync before classifying.
+  ⚠️ Off by default: it bank-syncs **every** account that has sync configured,
+  and one failing account (e.g. an old/disabled one) crashes the whole run.
+  Only enable it if all your synced accounts are healthy.
 - `rerunMissedTransactions` — re-process transactions previously tagged as missed.
 - `suggestNewCategories` — let the LLM create new categories/groups when nothing fits.
 - `dryRun` — log proposed changes without applying them.
