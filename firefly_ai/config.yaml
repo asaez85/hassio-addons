@@ -1,0 +1,56 @@
+name: Firefly III AI Categorizer
+version: "1.0.0"
+slug: firefly_ai
+description: AI-powered transaction categorization for Firefly III (by ejagombar)
+url: https://github.com/ejagombar/FireflyIII-AI-Categorizer
+arch:
+  - aarch64
+  - amd64
+startup: services
+boot: auto
+init: false
+ports:
+  3000/tcp: 3000
+ports_description:
+  3000/tcp: Web UI and Firefly III webhook endpoint (POST /webhook)
+webui: "http://[HOST]:[PORT:3000/tcp]"
+options:
+  AI_PROVIDER: openai
+  FIREFLY_URL: ""
+  FIREFLY_PERSONAL_TOKEN: ""
+  OPENAI_API_KEY: ""
+  OPENAI_MODEL: "gpt-4o-mini"
+  OPENAI_BASE_URL: ""
+  GEMINI_API_KEY: ""
+  GEMINI_MODEL: "gemini-2.5-flash"
+  DEEPSEEK_API_KEY: ""
+  DEEPSEEK_MODEL: "deepseek-chat"
+  ENABLE_UI: true
+  TAG_PREFIX: "ai"
+  WORKER_CONCURRENCY: 1
+  BATCH_CONCURRENCY: 5
+  HISTORY_CONTEXT_LIMIT: 5
+  HISTORY_LOOKBACK_DAYS: 90
+  HISTORY_CACHE_TTL: "10m"
+  env_vars: []
+schema:
+  AI_PROVIDER: list(openai|gemini|deepseek)
+  FIREFLY_URL: url?
+  FIREFLY_PERSONAL_TOKEN: password?
+  OPENAI_API_KEY: password?
+  OPENAI_MODEL: str?
+  OPENAI_BASE_URL: str?
+  GEMINI_API_KEY: password?
+  GEMINI_MODEL: str?
+  DEEPSEEK_API_KEY: password?
+  DEEPSEEK_MODEL: str?
+  ENABLE_UI: bool?
+  TAG_PREFIX: str?
+  WORKER_CONCURRENCY: int?
+  BATCH_CONCURRENCY: int?
+  HISTORY_CONTEXT_LIMIT: int?
+  HISTORY_LOOKBACK_DAYS: int?
+  HISTORY_CACHE_TTL: str?
+  env_vars:
+    - name: str
+      value: str?

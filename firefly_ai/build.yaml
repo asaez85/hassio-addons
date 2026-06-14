@@ -1,0 +1,7 @@
+# The upstream image is multi-arch (linux/amd64 + linux/arm64), so the same
+# tag resolves to the right variant on both an amd64 host and a Raspberry Pi
+# (aarch64). The upstream project publishes no versioned releases yet, so we
+# track the moving "latest" tag from GitHub Container Registry.
+build_from:
+  aarch64: ghcr.io/ejagombar/fireflyiii-ai-categorizer:latest
+  amd64: ghcr.io/ejagombar/fireflyiii-ai-categorizer:latest

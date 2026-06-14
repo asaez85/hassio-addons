@@ -31,6 +31,28 @@ Docker image to run as a Home Assistant addon:
 
 See the [addon documentation](actual_ai/DOCS.md) for configuration details.
 
+### [Firefly III AI Categorizer](firefly_ai/)
+
+AI-powered transaction categorization for [Firefly III](https://www.firefly-iii.org):
+a webhook-driven web service that, whenever Firefly III creates a transaction,
+asks an LLM (OpenAI, Gemini or DeepSeek) to categorize uncategorized withdrawals
+and tags them by confidence. Includes a dashboard for batch processing and
+manual review.
+
+This is a packaging of
+[FireflyIII-AI-Categorizer](https://github.com/ejagombar/FireflyIII-AI-Categorizer)
+by **[Eddie Gombar](https://github.com/ejagombar)** — all credit for the
+application goes to him. This repository only wraps his official multi-arch
+Docker image to run as a Home Assistant addon:
+
+- Publishes the web UI / `/webhook` endpoint on host port 3000.
+- Maps addon options to the app's environment variables; settings saved in the
+  web UI persist under the addon's `/data` volume.
+
+**Architectures:** `aarch64`, `amd64`
+
+See the [addon documentation](firefly_ai/DOCS.md) for configuration details.
+
 ### [Free Games Claimer Remaster](free_games_claimer_remaster/)
 
 Automatically claims free games on the Epic Games Store, Amazon Prime Gaming,
