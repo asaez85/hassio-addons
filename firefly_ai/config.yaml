@@ -35,7 +35,7 @@ options:
   env_vars: []
 schema:
   AI_PROVIDER: list(openai|gemini|deepseek)
-  FIREFLY_URL: url?
+  FIREFLY_URL: str?
   FIREFLY_PERSONAL_TOKEN: password?
   OPENAI_API_KEY: password?
   OPENAI_MODEL: str?
