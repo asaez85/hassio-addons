@@ -13,7 +13,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Pinned commit of https://github.com/P-Adamiec/Free-Games-Claimer-Remaster
-ARG FGC_COMMIT=6bdb8d1f84b94e823e3f3dfd86abf7f32babcb59
+ARG FGC_COMMIT=cca4992354215cef8807b748575af797606627f4
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \

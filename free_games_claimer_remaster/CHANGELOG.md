@@ -1,3 +1,7 @@
+## 1.0.4
+
+- Upstream sync to [`cca49923`](https://github.com/P-Adamiec/Free-Games-Claimer-Remaster/commit/cca4992354215cef8807b748575af797606627f4): docs: add Ch4r0ne shoutout and VNC_IP to changelog
+
 ## 1.0.3
 
 - Build from the upstream repository (P-Adamiec/Free-Games-Claimer-Remaster)
