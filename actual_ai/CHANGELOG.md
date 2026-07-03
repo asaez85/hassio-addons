@@ -1,3 +1,7 @@
+## 1.1.3
+
+- Upstream sync to [`2.4.2`](https://github.com/sakowicz/actual-ai/releases/tag/2.4.2)
+
 ## 1.1.2
 
 - Drop `syncAccountsBeforeClassify` from the default `FEATURES`. That feature

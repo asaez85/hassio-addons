@@ -2,5 +2,5 @@
 # tag resolves to the right variant on both an amd64 host and a Raspberry Pi
 # (aarch64). Pinned by version; the sync-actual-ai GitHub Action bumps it.
 build_from:
-  aarch64: sakowicz/actual-ai:2.4.1
-  amd64: sakowicz/actual-ai:2.4.1
+  aarch64: sakowicz/actual-ai:2.4.2
+  amd64: sakowicz/actual-ai:2.4.2
