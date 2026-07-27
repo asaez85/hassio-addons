@@ -1,3 +1,7 @@
+## 1.0.5
+
+- Upstream sync to [`38080559`](https://github.com/P-Adamiec/Free-Games-Claimer-Remaster/commit/38080559c2d556431c391ce2bef974fd28619f9b): v1.4: AliExpress check-in improvements, fingerprinting & store fixes, etc.
+
 ## 1.0.4
 
 - Upstream sync to [`cca49923`](https://github.com/P-Adamiec/Free-Games-Claimer-Remaster/commit/cca4992354215cef8807b748575af797606627f4): docs: add Ch4r0ne shoutout and VNC_IP to changelog
