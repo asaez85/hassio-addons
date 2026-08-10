@@ -1,3 +1,7 @@
+## 1.0.6
+
+- Upstream sync to [`9e5222be`](https://github.com/P-Adamiec/Free-Games-Claimer-Remaster/commit/9e5222beddb806d7a9ee1d01bd47ed501d9474c9): v1.5: Epic login and Latest tag fix
+
 ## 1.0.5
 
 - Upstream sync to [`38080559`](https://github.com/P-Adamiec/Free-Games-Claimer-Remaster/commit/38080559c2d556431c391ce2bef974fd28619f9b): v1.4: AliExpress check-in improvements, fingerprinting & store fixes, etc.
