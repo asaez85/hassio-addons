@@ -1,3 +1,7 @@
+## 1.0.7
+
+- Upstream sync to [`1e2b38f9`](https://github.com/P-Adamiec/Free-Games-Claimer-Remaster/commit/1e2b38f945b9371641c64a62cff1d5fb65df96c0): v1.6: Ubisoft and Fab stores, reverse proxy VNC links
+
 ## 1.0.6
 
 - Upstream sync to [`9e5222be`](https://github.com/P-Adamiec/Free-Games-Claimer-Remaster/commit/9e5222beddb806d7a9ee1d01bd47ed501d9474c9): v1.5: Epic login and Latest tag fix
