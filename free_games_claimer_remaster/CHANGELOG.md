@@ -1,3 +1,7 @@
+## 1.0.8
+
+- Upstream sync to [`8b96d61c`](https://github.com/P-Adamiec/Free-Games-Claimer-Remaster/commit/8b96d61cb6d0154152913ca84aa0d85426d0a631): v1.8: Verify Epic claims, fix browser start, warn on unknown settings
+
 ## 1.0.7
 
 - Upstream sync to [`1e2b38f9`](https://github.com/P-Adamiec/Free-Games-Claimer-Remaster/commit/1e2b38f945b9371641c64a62cff1d5fb65df96c0): v1.6: Ubisoft and Fab stores, reverse proxy VNC links
