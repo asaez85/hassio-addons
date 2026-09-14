@@ -1,3 +1,7 @@
+## 1.0.9
+
+- Upstream sync to [`b9ef573d`](https://github.com/P-Adamiec/Free-Games-Claimer-Remaster/commit/b9ef573d45640dbf48865d3a961b655d5a36664f): v1.9: Unify 2FA, GamerPower feeds the stores, stop waiting for nobody
+
 ## 1.0.8
 
 - Upstream sync to [`8b96d61c`](https://github.com/P-Adamiec/Free-Games-Claimer-Remaster/commit/8b96d61cb6d0154152913ca84aa0d85426d0a631): v1.8: Verify Epic claims, fix browser start, warn on unknown settings
