@@ -1,5 +1,5 @@
 name: "CrowdSec WAN IP Updater"
-version: "1.0.0"
+version: "1.0.1"
 slug: "crowdsec_wan_ip"
 description: "Detects changes in the home WAN IP and notifies the VPS CrowdSec whitelist updater."
 url: "https://github.com/asaez85/hassio-addons/tree/main/crowdsec_wan_ip"

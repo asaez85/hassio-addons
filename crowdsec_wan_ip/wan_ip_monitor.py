@@ -12,6 +12,7 @@ import json
 import logging
 import os
 import re
+import shutil
 import socket
 import subprocess
 import sys
@@ -217,6 +218,23 @@ def _trigger_webhook(config: dict, old_ip: str | None, new_ip: str) -> bool:
     return False
 
 
+def _prepare_ssh_key(key_path: str) -> str | None:
+    src = Path(key_path)
+    if not src.exists():
+        LOG.error("SSH private key not found at %s", key_path)
+        return None
+    # /config is often mounted read-only or with 0755 in HA containers.
+    # Copy key to /tmp and enforce 0600 so OpenSSH will accept it.
+    dst = Path("/tmp/crowdsec_ssh_key")
+    try:
+        shutil.copyfile(src, dst)
+        dst.chmod(0o600)
+        return str(dst)
+    except OSError as exc:
+        LOG.error("Failed to prepare SSH key from %s: %s", key_path, exc)
+        return None
+
+
 def _trigger_ssh(config: dict, old_ip: str | None, new_ip: str) -> bool:
     host = config["ssh_host"]
     if not host:
@@ -224,14 +242,14 @@ def _trigger_ssh(config: dict, old_ip: str | None, new_ip: str) -> bool:
         return False
 
     key_path = config["ssh_key_path"]
-    if not Path(key_path).exists():
-        LOG.error("SSH private key not found at %s", key_path)
+    effective_key = _prepare_ssh_key(key_path)
+    if not effective_key:
         return False
 
     cmd = [
         "ssh",
         *config["ssh_options"],
-        "-i", key_path,
+        "-i", effective_key,
         "-p", str(config["ssh_port"]),
         f"{config['ssh_user']}@{host}",
         config["ssh_command"],
