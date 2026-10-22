@@ -78,6 +78,19 @@ See the [addon documentation](free_games_claimer_remaster/DOCS.md) for
 configuration details and the
 [changelog](free_games_claimer_remaster/CHANGELOG.md) for version history.
 
+### [CrowdSec WAN IP Updater](crowdsec_wan_ip/)
+
+Periodically detects changes in the home public WAN IP and notifies the remote
+VPS to update CrowdSec whitelist parser rules, avoiding lockout or false positive blocks.
+
+- Resolves public WAN IP using multiple redundant external resolvers.
+- Notifies VPS via secure forced-command SSH or JSON webhook.
+- Safe validation of IPv4/IPv6 addresses before sending updates.
+
+**Architectures:** `aarch64`, `armv7`, `amd64`
+
+See the [addon documentation](crowdsec_wan_ip/DOCS.md) for configuration details.
+
 ## License
 
 [AGPL-3.0](LICENSE), the same license as the upstream project.

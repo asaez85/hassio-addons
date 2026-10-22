@@ -1,0 +1,56 @@
+name: "CrowdSec WAN IP Updater"
+version: "1.0.0"
+slug: "crowdsec_wan_ip"
+description: "Detects changes in the home WAN IP and notifies the VPS CrowdSec whitelist updater."
+url: "https://github.com/asaez85/hassio-addons/tree/main/crowdsec_wan_ip"
+arch:
+  - aarch64
+  - armv7
+  - amd64
+init: false
+startup: services
+boot: auto
+hassio_api: false
+homeassistant_api: false
+host_network: false
+map:
+  - data:rw
+  - config:ro
+options:
+  check_interval_minutes: 5
+  resolver_urls:
+    - "https://api.ipify.org?format=json"
+    - "https://ifconfig.me/ip"
+    - "https://icanhazip.com"
+  update_mode: "ssh"
+  notify_on_initial_run: true
+  webhook_url: ""
+  webhook_token: ""
+  webhook_timeout_seconds: 30
+  webhook_retries: 3
+  ssh_host: ""
+  ssh_port: 22
+  ssh_user: "root"
+  ssh_key_path: "/config/crowdsec_wan_ip_ssh_key"
+  ssh_command: "update-crowdsec-whitelist"
+  ssh_options:
+    - "-o StrictHostKeyChecking=accept-new"
+    - "-o BatchMode=yes"
+    - "-o ConnectTimeout=10"
+schema:
+  check_interval_minutes: int(1,1440)
+  resolver_urls:
+    - str
+  update_mode: list(ssh|webhook)
+  notify_on_initial_run: bool
+  webhook_url: str?
+  webhook_token: password?
+  webhook_timeout_seconds: int(5,300)?
+  webhook_retries: int(1,10)?
+  ssh_host: str?
+  ssh_port: port?
+  ssh_user: str?
+  ssh_key_path: str?
+  ssh_command: str?
+  ssh_options:
+    - str?
